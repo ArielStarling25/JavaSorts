@@ -1,10 +1,69 @@
 public class Sort {
     public static void main(String args[]){
-        //testSmallDataSet();
-        //testLargeDataSet();
-        //testMassiveDataSet();
+        testSmallDataSet();
+        // testLargeDataSet();
+        // testMassiveDataSet();
+        // testGiganticDataSet();
         //testDuplicatesDataSet();
         //testReverseOrder();
+    }
+
+    public static void testGiganticDataSet(){
+        System.out.println("== Gigantic data set ==");
+        System.out.println("");
+
+        int size = 200000; //ArraySize
+        int low = 10; //min value
+        int high = 10000; //max value
+
+        int[] bigBoiArray = new int[size];
+        randomlyFillArray(bigBoiArray, low, high);
+        int[] bigBoiArray2 = new int[size];
+        int[] bigBoiArray3 = new int[size];
+        int[] bigBoiArray4 = new int[size];
+        int[] bigBoiArray5 = new int[size];
+        Integer[] bigBoiArray6 = new Integer[size];
+
+        for(int i = 0; i < size; i++){
+            bigBoiArray2[i] = bigBoiArray[i];
+            bigBoiArray3[i] = bigBoiArray[i];
+            bigBoiArray4[i] = bigBoiArray[i];
+            bigBoiArray5[i] = bigBoiArray[i];
+            bigBoiArray6[i] = bigBoiArray[i];
+        }
+
+        System.out.println("Begin Sorting...");
+        long timeStart = System.currentTimeMillis();
+        bigBoiArray2 = OtherSorts.bubbleSort(bigBoiArray2);
+        long timeStop = System.currentTimeMillis();
+        long timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray2, timeTaken, "BubbleSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray6 = PinBallSort.sort(bigBoiArray6, false);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray6, timeTaken, "PinBallSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray3 = OtherSorts.insertionSort(bigBoiArray3);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray3, timeTaken, "InsertionSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray4 = OtherSorts.insertionSort(bigBoiArray4);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray4, timeTaken, "SelectionSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray5 = OtherSorts.mergeSort(bigBoiArray5, 0, bigBoiArray5.length-1);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray5, timeTaken, "MergeSort");
+
+        System.out.println("");
     }
     
     public static void testSmallDataSet(){
@@ -13,7 +72,7 @@ public class Sort {
 
         int size = 20; //ArraySize
         int low = 10; //min value
-        int high = 200; //max value
+        int high = 50; //max value
 
         int[] bigBoiArray = new int[size];
         randomlyFillArray(bigBoiArray, low, high);
@@ -38,7 +97,7 @@ public class Sort {
         printArray(bigBoiArray2, timeTaken, "BubbleSort");
 
         timeStart = System.currentTimeMillis();
-        bigBoiArray6 = PinBallSort.sort(bigBoiArray6);
+        bigBoiArray6 = PinBallSort.sort(bigBoiArray6, false);
         timeStop = System.currentTimeMillis();
         timeTaken = timeStop - timeStart;
         printArray(bigBoiArray6, timeTaken, "PinBallSort");
@@ -95,7 +154,7 @@ public class Sort {
         printArray(bigBoiArray2, timeTaken, "BubbleSort");
 
         timeStart = System.currentTimeMillis();
-        bigBoiArray6 = PinBallSort.sort(bigBoiArray6);
+        bigBoiArray6 = PinBallSort.sort(bigBoiArray6, false);
         timeStop = System.currentTimeMillis();
         timeTaken = timeStop - timeStart;
         printArray(bigBoiArray6, timeTaken, "PinBallSort");
@@ -152,7 +211,7 @@ public class Sort {
         printArray(bigBoiArray2, timeTaken, "BubbleSort");
 
         timeStart = System.currentTimeMillis();
-        bigBoiArray6 = PinBallSort.sort(bigBoiArray6);
+        bigBoiArray6 = PinBallSort.sort(bigBoiArray6, false);
         timeStop = System.currentTimeMillis();
         timeTaken = timeStop - timeStart;
         printArray(bigBoiArray6, timeTaken, "PinBallSort");
@@ -182,7 +241,7 @@ public class Sort {
         System.out.println("== Duplicate values data set ==");
         System.out.println("");
 
-        int size = 2000; //ArraySize
+        int size = 10000; //ArraySize
         int low = 10; //min value
         int high = 20; //max value
 
@@ -209,7 +268,7 @@ public class Sort {
         printArray(bigBoiArray2, timeTaken, "BubbleSort");
 
         timeStart = System.currentTimeMillis();
-        bigBoiArray6 = PinBallSort.sort(bigBoiArray6);
+        bigBoiArray6 = PinBallSort.sort(bigBoiArray6, false);
         timeStop = System.currentTimeMillis();
         timeTaken = timeStop - timeStart;
         printArray(bigBoiArray6, timeTaken, "PinBallSort");
@@ -268,7 +327,7 @@ public class Sort {
         printArray(bigBoiArray2, timeTaken, "BubbleSort");
 
         timeStart = System.currentTimeMillis();
-        bigBoiArray6 = PinBallSort.sort(bigBoiArray6);
+        bigBoiArray6 = PinBallSort.sort(bigBoiArray6, false);
         timeStop = System.currentTimeMillis();
         timeTaken = timeStop - timeStart;
         printArray(bigBoiArray6, timeTaken, "PinBallSort");
@@ -306,11 +365,11 @@ public class Sort {
         //large dataset
         Integer[] array5 = {45,23,12,65,76,45,34,76,1,2,6,9,23,74,5,9,4,7,45,26,20,12,23,7,8,10,14,16,29,30,40,1,1,34,54,76,99,34,23,99,100};
 
-        printArray(PinBallSort.sort(array1));
-        printArray(PinBallSort.sort(array2));
-        printArray(PinBallSort.sort(array3));
-        printArray(PinBallSort.sort(array4));
-        printArray(PinBallSort.sort(array5));
+        printArray(PinBallSort.sort(array1, false));
+        printArray(PinBallSort.sort(array2, false));
+        printArray(PinBallSort.sort(array3, false));
+        printArray(PinBallSort.sort(array4, false));
+        printArray(PinBallSort.sort(array5, false));
     }
 
     public static int randomInt(int a, int b) {

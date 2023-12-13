@@ -7,7 +7,7 @@
 
 public class PinBallSort {
 
-    public static Integer[] sort(Integer[] arr){
+    public static Integer[] sort(Integer[] arr, boolean visual){
         Integer[] result = new Integer[arr.length];
 
         int min = arr[0], max = arr[0];
@@ -37,10 +37,10 @@ public class PinBallSort {
             while(!foundPlace){
                 //System.out.println("Attemting to place: " + arr[i]); //DEBUG
                 if(indexPlace >= arr.length){
-                    indexPlace--;
+                    indexPlace = arr.length-1;
                 }
                 else if(indexPlace <= 0){
-                    indexPlace++;
+                    indexPlace = 0;
                 }
 
                 if(result[indexPlace] == null){
@@ -174,7 +174,10 @@ public class PinBallSort {
                     }
                 }
 
-                printArr(result); //DEBUG
+                if(visual){
+                    visualRepArr(result);
+                }
+                //printArr(result); //DEBUG
             }
             //printArr(result); //DEBUG
         }   
@@ -275,5 +278,22 @@ public class PinBallSort {
             }
         }
         System.out.println("");
+    }
+
+    public static void visualRepArr(Integer[] arr){
+        System.out.println("=======================================");
+        for(int i = 0; i < arr.length; i++){
+            if(arr[i] == null){
+                System.out.println("|N");
+            }
+            else{
+                System.out.print("|");
+                for(int j = 0; j < arr[i]; j++){
+                    System.out.print("*");
+                }
+                System.out.println("");
+            }
+        }
+        System.out.println("========================================");
     }
 }
