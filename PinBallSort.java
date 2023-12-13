@@ -3,19 +3,18 @@
 // Date Completed: 12/12/2023
 // By: Ariel Starling
 // My own attempt at creating a sorting algorithm :))
-// Current state: Its really good at making partially sorted arrays :)))
+// Current state: Slow on arrays with lots of duplicates
 
 public class PinBallSort {
 
     public static Integer[] sort(Integer[] arr){
         Integer[] result = new Integer[arr.length];
-        //int[] returnArr = new int[arr.length];
-        for(int i = 0; i < result.length; i++){
-            result[i] = null;
-        }
 
         int min = arr[0], max = arr[0];
         for(int i = 0; i < arr.length; i++){
+
+            result[i] = null;
+
             if(max < arr[i]){
                 max = arr[i];
             }
@@ -36,7 +35,7 @@ public class PinBallSort {
             int forth = 0, back = 0;
             int direction = 1;
             while(!foundPlace){
-                System.out.println("Attemting to place: " + arr[i]);
+                //System.out.println("Attemting to place: " + arr[i]); //DEBUG
                 if(indexPlace >= arr.length){
                     indexPlace--;
                 }
@@ -81,10 +80,10 @@ public class PinBallSort {
                     }
                     else{ // check both sides
                         if(result[indexPlace + 1] != null && result[indexPlace - 1] != null){
-                            if(result[indexPlace - 1] < arr[i] && result[indexPlace + 1] > arr[i]){
+                            if(result[indexPlace - 1] <= arr[i] && result[indexPlace + 1] >= arr[i]){
                                 result[indexPlace] = arr[i];
                                 foundPlace = true;
-                                System.out.println("Placed: " + arr[i] + " at: " + indexPlace);
+                                //System.out.println("Placed: " + arr[i] + " at: " + indexPlace); //DEBUG
                             }
                             else{
                                 if(result[indexPlace - 1] > arr[i]){
@@ -102,12 +101,14 @@ public class PinBallSort {
                                 }
 
                                 if(indexPlace <= 0 || indexPlace >= (result.length-1)){
-                                    System.out.println("Attempting shifting for escaping from index: " + indexPlace);
+                                    //System.out.println("Attempting shifting for escaping from index: " + indexPlace); //DEBUG
                                     int check = checkEmpty(result, indexPlace);
                                     result = shifter(result, indexPlace, check);
+                                    back = 0;
+                                    forth = 0;
                                 }
                                 else{
-                                    System.out.println("Attempt escape from index: " + indexPlace);
+                                    //System.out.println("Attempt escape from index: " + indexPlace); //DEBUG
                                     indexPlace = indexPlace + direction;
                                     if(direction > 0){
                                         forth++;
@@ -121,7 +122,7 @@ public class PinBallSort {
                         else{
                             result[indexPlace] = arr[i];
                             foundPlace = true;
-                            System.out.println("Placed: " + arr[i] + " at: " + indexPlace);
+                            //System.out.println("Placed: " + arr[i] + " at: " + indexPlace); //DEBUG
                         }
                     }
                 }
@@ -173,9 +174,9 @@ public class PinBallSort {
                     }
                 }
 
-                printArr(result);
+                //printArr(result); //DEBUG
             }
-            //printArr(result);
+            //printArr(result); //DEBUG
         }   
         
         return result;
@@ -211,41 +212,53 @@ public class PinBallSort {
     }
 
     private static int checkEmpty(Integer[] arr, int fromWhere){
-        System.out.println("Checking nulls");
+        //System.out.println("Checking nulls"); //DEBUG
         int leftLooker = fromWhere - 1, rightLooker = fromWhere + 1;
+        boolean leftFailure = false, rightFailure = false;
         int found = 0;
         int leftCount = -1, rightCount = 1;
         while(found == 0){
-            if(leftLooker >= 0){
-                if(arr[leftLooker] != null){
-                    leftLooker--;
-                    leftCount--;
-                    //System.out.println("leftLooker"); //DEBUG
+            if(!leftFailure){
+                if(leftLooker >= 0){
+                    if(arr[leftLooker] != null){
+                        leftLooker--;
+                        leftCount--;
+                        //System.out.println("leftLooker index: " + leftLooker); //DEBUG
+                    }
+                    else{
+                        //System.out.println("Found on left"); //DEBUG
+                        found = leftCount;
+                        break;
+                    }
                 }
                 else{
-                    //System.out.println("Found on left"); //DEBUG
-                    found = leftCount;
-                    break;
+                    //System.out.println("Left Array border: " + leftLooker); //DEBUG
+                    leftFailure = true;
                 }
-            }
-            else{
-                //System.out.println("Left Array border: " + leftLooker); //DEBUG
             }
 
-            if(rightLooker <= (arr.length-1)){
-                if(arr[rightLooker] != null){
-                    rightLooker++;
-                    rightCount++;
-                    //System.out.println("rightLooker"); //DEBUG
+            if(!rightFailure){
+                if(rightLooker <= (arr.length-1)){
+                    if(arr[rightLooker] != null){
+                        rightLooker++;
+                        rightCount++;
+                        //System.out.println("rightLooker index: " + rightLooker); //DEBUG
+                    }
+                    else{
+                        //System.out.println("Found on right"); //DEBUG
+                        found = rightCount;
+                        break;
+                    }
                 }
                 else{
-                    //System.out.println("Found on right"); //DEBUG
-                    found = rightCount;
-                    break;
+                    //System.out.println("Right Array border: " + rightLooker); //DEBUG
+                    rightFailure = true;
                 }
             }
-            else{
-                //System.out.println("Right Array border: " + rightLooker); //DEBUG
+
+            if(rightFailure && leftFailure){
+                System.out.print("FAILED TO FIND NULL | fromWhereValue: " + fromWhere + " "); //DEBUG
+                //printArr(arr);
             }
         }
         //System.out.println("Found: " + found + " From: " + fromWhere); //DEBUG

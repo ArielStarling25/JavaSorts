@@ -3,7 +3,7 @@ public class Sort {
 
         int size = 50;
         int[] bigBoiArray = new int[size];
-        randomlyFillArray(bigBoiArray, 10, 500);
+        randomlyFillArray(bigBoiArray, 10, 20);
         int[] bigBoiArray2 = new int[size];
         int[] bigBoiArray3 = new int[size];
         int[] bigBoiArray4 = new int[size];
