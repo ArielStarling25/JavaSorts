@@ -3,7 +3,7 @@
 // Date Completed: 12/12/2023
 // By: Ariel Starling
 // My own attempt at creating a sorting algorithm :))
-// Current state: Slow on arrays with lots of duplicates
+// Current state: Slow (Understatement, its very slow) on arrays with lots of duplicates, and breaks on reverse sorted arrays
 
 public class PinBallSort {
 
@@ -174,7 +174,7 @@ public class PinBallSort {
                     }
                 }
 
-                //printArr(result); //DEBUG
+                printArr(result); //DEBUG
             }
             //printArr(result); //DEBUG
         }   

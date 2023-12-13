@@ -1,9 +1,22 @@
 public class Sort {
     public static void main(String args[]){
+        //testSmallDataSet();
+        //testLargeDataSet();
+        //testMassiveDataSet();
+        //testDuplicatesDataSet();
+        //testReverseOrder();
+    }
+    
+    public static void testSmallDataSet(){
+        System.out.println("== Small data set ==");
+        System.out.println("");
 
-        int size = 50;
+        int size = 20; //ArraySize
+        int low = 10; //min value
+        int high = 200; //max value
+
         int[] bigBoiArray = new int[size];
-        randomlyFillArray(bigBoiArray, 10, 20);
+        randomlyFillArray(bigBoiArray, low, high);
         int[] bigBoiArray2 = new int[size];
         int[] bigBoiArray3 = new int[size];
         int[] bigBoiArray4 = new int[size];
@@ -48,7 +61,237 @@ public class Sort {
         timeTaken = timeStop - timeStart;
         printArray(bigBoiArray5, timeTaken, "MergeSort");
 
-        //pinBallSortTest();
+        System.out.println("");
+    }
+
+    public static void testLargeDataSet(){
+        System.out.println("== Large data set ==");
+        System.out.println("");
+
+        int size = 20000; //ArraySize
+        int low = 10; //min value
+        int high = 5000; //max value
+
+        int[] bigBoiArray = new int[size];
+        randomlyFillArray(bigBoiArray, low, high);
+        int[] bigBoiArray2 = new int[size];
+        int[] bigBoiArray3 = new int[size];
+        int[] bigBoiArray4 = new int[size];
+        int[] bigBoiArray5 = new int[size];
+        Integer[] bigBoiArray6 = new Integer[size];
+
+        for(int i = 0; i < size; i++){
+            bigBoiArray2[i] = bigBoiArray[i];
+            bigBoiArray3[i] = bigBoiArray[i];
+            bigBoiArray4[i] = bigBoiArray[i];
+            bigBoiArray5[i] = bigBoiArray[i];
+            bigBoiArray6[i] = bigBoiArray[i];
+        }
+
+        long timeStart = System.currentTimeMillis();
+        bigBoiArray2 = OtherSorts.bubbleSort(bigBoiArray2);
+        long timeStop = System.currentTimeMillis();
+        long timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray2, timeTaken, "BubbleSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray6 = PinBallSort.sort(bigBoiArray6);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray6, timeTaken, "PinBallSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray3 = OtherSorts.insertionSort(bigBoiArray3);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray3, timeTaken, "InsertionSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray4 = OtherSorts.insertionSort(bigBoiArray4);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray4, timeTaken, "SelectionSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray5 = OtherSorts.mergeSort(bigBoiArray5, 0, bigBoiArray5.length-1);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray5, timeTaken, "MergeSort");
+
+        System.out.println("");
+    }
+
+    public static void testMassiveDataSet(){
+        System.out.println("== Massive data set ==");
+        System.out.println("");
+
+        int size = 100000; //ArraySize
+        int low = 10; //min value
+        int high = 10000; //max value
+
+        int[] bigBoiArray = new int[size];
+        randomlyFillArray(bigBoiArray, low, high);
+        int[] bigBoiArray2 = new int[size];
+        int[] bigBoiArray3 = new int[size];
+        int[] bigBoiArray4 = new int[size];
+        int[] bigBoiArray5 = new int[size];
+        Integer[] bigBoiArray6 = new Integer[size];
+
+        for(int i = 0; i < size; i++){
+            bigBoiArray2[i] = bigBoiArray[i];
+            bigBoiArray3[i] = bigBoiArray[i];
+            bigBoiArray4[i] = bigBoiArray[i];
+            bigBoiArray5[i] = bigBoiArray[i];
+            bigBoiArray6[i] = bigBoiArray[i];
+        }
+
+        long timeStart = System.currentTimeMillis();
+        bigBoiArray2 = OtherSorts.bubbleSort(bigBoiArray2);
+        long timeStop = System.currentTimeMillis();
+        long timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray2, timeTaken, "BubbleSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray6 = PinBallSort.sort(bigBoiArray6);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray6, timeTaken, "PinBallSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray3 = OtherSorts.insertionSort(bigBoiArray3);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray3, timeTaken, "InsertionSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray4 = OtherSorts.insertionSort(bigBoiArray4);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray4, timeTaken, "SelectionSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray5 = OtherSorts.mergeSort(bigBoiArray5, 0, bigBoiArray5.length-1);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray5, timeTaken, "MergeSort");
+
+        System.out.println("");
+    }
+
+    public static void testDuplicatesDataSet(){
+        System.out.println("== Duplicate values data set ==");
+        System.out.println("");
+
+        int size = 2000; //ArraySize
+        int low = 10; //min value
+        int high = 20; //max value
+
+        int[] bigBoiArray = new int[size];
+        randomlyFillArray(bigBoiArray, low, high);
+        int[] bigBoiArray2 = new int[size];
+        int[] bigBoiArray3 = new int[size];
+        int[] bigBoiArray4 = new int[size];
+        int[] bigBoiArray5 = new int[size];
+        Integer[] bigBoiArray6 = new Integer[size];
+
+        for(int i = 0; i < size; i++){
+            bigBoiArray2[i] = bigBoiArray[i];
+            bigBoiArray3[i] = bigBoiArray[i];
+            bigBoiArray4[i] = bigBoiArray[i];
+            bigBoiArray5[i] = bigBoiArray[i];
+            bigBoiArray6[i] = bigBoiArray[i];
+        }
+
+        long timeStart = System.currentTimeMillis();
+        bigBoiArray2 = OtherSorts.bubbleSort(bigBoiArray2);
+        long timeStop = System.currentTimeMillis();
+        long timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray2, timeTaken, "BubbleSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray6 = PinBallSort.sort(bigBoiArray6);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray6, timeTaken, "PinBallSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray3 = OtherSorts.insertionSort(bigBoiArray3);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray3, timeTaken, "InsertionSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray4 = OtherSorts.insertionSort(bigBoiArray4);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray4, timeTaken, "SelectionSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray5 = OtherSorts.mergeSort(bigBoiArray5, 0, bigBoiArray5.length-1);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray5, timeTaken, "MergeSort");
+
+        System.out.println("");
+    }
+
+    public static void testReverseOrder(){
+        System.out.println("== Reverse order data set ==");
+        System.out.println("");
+
+        int size = 50; //ArraySize
+        int low = 10; //min value
+        int high = 500; //max value
+
+        int[] bigBoiArray = new int[size];
+        randomlyFillArray(bigBoiArray, low, high);
+        bigBoiArray = OtherSorts.mergeSort(bigBoiArray, 0, bigBoiArray.length-1);
+
+        int[] bigBoiArray2 = new int[size];
+        int[] bigBoiArray3 = new int[size];
+        int[] bigBoiArray4 = new int[size];
+        int[] bigBoiArray5 = new int[size];
+        Integer[] bigBoiArray6 = new Integer[size];
+
+        for(int i = 0; i < size; i++){
+            bigBoiArray2[size-1-i] = bigBoiArray[i];
+            bigBoiArray3[size-1-i] = bigBoiArray[i];
+            bigBoiArray4[size-1-i] = bigBoiArray[i];
+            bigBoiArray5[size-1-i] = bigBoiArray[i];
+            bigBoiArray6[size-1-i] = bigBoiArray[i];
+        }
+
+        long timeStart = System.currentTimeMillis();
+        bigBoiArray2 = OtherSorts.bubbleSort(bigBoiArray2);
+        long timeStop = System.currentTimeMillis();
+        long timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray2, timeTaken, "BubbleSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray6 = PinBallSort.sort(bigBoiArray6);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray6, timeTaken, "PinBallSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray3 = OtherSorts.insertionSort(bigBoiArray3);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray3, timeTaken, "InsertionSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray4 = OtherSorts.insertionSort(bigBoiArray4);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray4, timeTaken, "SelectionSort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray5 = OtherSorts.mergeSort(bigBoiArray5, 0, bigBoiArray5.length-1);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray5, timeTaken, "MergeSort");
+
+        System.out.println("");
     }
 
     public static void pinBallSortTest(){
