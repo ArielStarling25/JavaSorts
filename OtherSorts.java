@@ -114,4 +114,73 @@ public class OtherSorts {
         }
         return arr;
     }
+
+    public static int getMax(int a[]) // function to get maximum element from the given array 
+    {  
+        int n = a.length;  
+        int max = a[0];  
+        for (int i = 1; i < n; i++)  
+            if (a[i] > max)  
+                max = a[i];  
+        return max;  
+    }  
+
+    public static int[] bucketSort(int a[]) // function to implement bucket sort  
+    {  
+        int n = a.length;  
+        int max = getMax(a); //max is the maximum element of array  
+        int bucket[] = new int[max+1];   
+        for (int i = 0; i <= max; i++)  
+        {  
+            bucket[i] = 0;  
+        }  
+        for (int i = 0; i < n; i++)  
+        {  
+            bucket[a[i]]++;  
+            
+        }  
+        for (int i = 0, j = 0; i <= max; i++)  
+        {  
+            while (bucket[i] > 0)  
+            {  
+                a[j++] = i;  
+                bucket[i]--;  
+            }  
+        }  
+        return a;
+    }  
+
+    public static int partition (int a[], int start, int end)  
+    {  
+        int pivot = a[end]; // pivot element  
+        int i = (start - 1);  
+    
+        for (int j = start; j <= end - 1; j++)  
+        {  
+            // If current element is smaller than the pivot  
+            if (a[j] < pivot)  
+            {  
+                i++; // increment index of smaller element  
+                int t = a[i];  
+                a[i] = a[j];  
+                a[j] = t;  
+            }  
+        }  
+        int t = a[i+1];  
+        a[i+1] = a[end];  
+        a[end] = t;  
+        return (i + 1);  
+    }  
+    
+    /* function to implement quick sort */  
+    public static int[] quickSort(int a[], int start, int end) /* a[] = array to be sorted, start = Starting index, end = Ending index */  
+    {  
+        if (start < end)  
+        {  
+            int p = partition(a, start, end);  //p is partitioning index  
+            quickSort(a, start, p - 1);  
+            quickSort(a, p + 1, end);  
+        }  
+        return a;
+    }  
 }

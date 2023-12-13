@@ -1,9 +1,9 @@
 public class Sort {
     public static void main(String args[]){
-        testSmallDataSet();
+        //testSmallDataSet();
         // testLargeDataSet();
         // testMassiveDataSet();
-        // testGiganticDataSet();
+        testGiganticDataSet();
         //testDuplicatesDataSet();
         //testReverseOrder();
     }
@@ -23,6 +23,7 @@ public class Sort {
         int[] bigBoiArray4 = new int[size];
         int[] bigBoiArray5 = new int[size];
         Integer[] bigBoiArray6 = new Integer[size];
+        int[] bigBoiArray7 = new int[size];
 
         for(int i = 0; i < size; i++){
             bigBoiArray2[i] = bigBoiArray[i];
@@ -30,38 +31,46 @@ public class Sort {
             bigBoiArray4[i] = bigBoiArray[i];
             bigBoiArray5[i] = bigBoiArray[i];
             bigBoiArray6[i] = bigBoiArray[i];
+            bigBoiArray7[i] = bigBoiArray[i];
         }
 
         System.out.println("Begin Sorting...");
+
         long timeStart = System.currentTimeMillis();
-        bigBoiArray2 = OtherSorts.bubbleSort(bigBoiArray2);
+        bigBoiArray2 = OtherSorts.quickSort(bigBoiArray2, 0, bigBoiArray2.length-1);
         long timeStop = System.currentTimeMillis();
         long timeTaken = timeStop - timeStart;
-        printArray(bigBoiArray2, timeTaken, "BubbleSort");
+        printArray(bigBoiArray2, timeTaken, "Quick Sort");
 
         timeStart = System.currentTimeMillis();
         bigBoiArray6 = PinBallSort.sort(bigBoiArray6, false);
         timeStop = System.currentTimeMillis();
         timeTaken = timeStop - timeStart;
-        printArray(bigBoiArray6, timeTaken, "PinBallSort");
+        printArray(bigBoiArray6, timeTaken, "Pinball Sort");
 
         timeStart = System.currentTimeMillis();
         bigBoiArray3 = OtherSorts.insertionSort(bigBoiArray3);
         timeStop = System.currentTimeMillis();
         timeTaken = timeStop - timeStart;
-        printArray(bigBoiArray3, timeTaken, "InsertionSort");
+        printArray(bigBoiArray3, timeTaken, "Insertion Sort");
 
         timeStart = System.currentTimeMillis();
         bigBoiArray4 = OtherSorts.insertionSort(bigBoiArray4);
         timeStop = System.currentTimeMillis();
         timeTaken = timeStop - timeStart;
-        printArray(bigBoiArray4, timeTaken, "SelectionSort");
+        printArray(bigBoiArray4, timeTaken, "Selection Sort");
 
         timeStart = System.currentTimeMillis();
         bigBoiArray5 = OtherSorts.mergeSort(bigBoiArray5, 0, bigBoiArray5.length-1);
         timeStop = System.currentTimeMillis();
         timeTaken = timeStop - timeStart;
-        printArray(bigBoiArray5, timeTaken, "MergeSort");
+        printArray(bigBoiArray5, timeTaken, "Merge Sort");
+
+        timeStart = System.currentTimeMillis();
+        bigBoiArray7 = OtherSorts.bucketSort(bigBoiArray7);
+        timeStop = System.currentTimeMillis();
+        timeTaken = timeStop - timeStart;
+        printArray(bigBoiArray7, timeTaken, "Bucket Sort");
 
         System.out.println("");
     }

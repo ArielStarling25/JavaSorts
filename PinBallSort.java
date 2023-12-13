@@ -3,7 +3,8 @@
 // Date Completed: 12/12/2023
 // By: Ariel Starling
 // My own attempt at creating a sorting algorithm :))
-// Current state: Slow (Understatement, its very slow) on arrays with lots of duplicates, and breaks on reverse sorted arrays
+// Current state: Slow (Understatement, can be slower than bubble) on arrays with lots of duplicates, and breaks on reverse sorted arrays
+// Time complexity: Best case: O(n) Average case: How to say that gradually becomes slower the more the sort progresses? O(n + k)? Worst case: O(n^3)
 
 public class PinBallSort {
 
@@ -11,7 +12,7 @@ public class PinBallSort {
         Integer[] result = new Integer[arr.length];
 
         int min = arr[0], max = arr[0];
-        for(int i = 0; i < arr.length; i++){
+        for(int i = 0; i < arr.length; i++){ 
 
             result[i] = null;
 
