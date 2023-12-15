@@ -1,10 +1,16 @@
 
-// == TrickleSort ==
+// == Pinball SortS==
 // Date Completed: 12/12/2023
 // By: Ariel Starling
 // My own attempt at creating a sorting algorithm :))
-// Current state: Slow (Understatement, can be slower than bubble) on arrays with lots of duplicates, and breaks on reverse sorted arrays
-// Time complexity: Best case: O(n) Average case: How to say that gradually becomes slower the more the sort progresses? O(n + k)? Worst case: O(n^3)
+// Current state: No problems as of now
+// Time complexity: 
+// Best case: O(n) 
+// - O(n) only when items have already been sorted, or when there are no duplicate values and they are evenly spaced out according to their array size like non-repeating numbers 1-10 in a size 10 array
+// Average case: How to say that gradually becomes slower the more the sort progresses? O(n + k)? 
+// - this is the most common case where the more the sort progresses, it will become slower due to more shuffling involved
+// Worst case: O(n^3)
+// - this case will only occur when there are many duplicate values and are in reverse order, this is because of a ridiculous amount of shuffling of values involved
 
 public class PinBallSort {
 
@@ -24,24 +30,31 @@ public class PinBallSort {
                 min = arr[i];
             }
         }
+        long beforeRange = (max - min);  
+        long afterRange = arr.length-1;  
+        int iterations = 0;
 
         for(int i = 0; i < arr.length; i++){
             boolean foundPlace = false;
 
-            int beforeRange = (max - min);  
-            int afterRange = arr.length-1;  
-            float value = (((arr[i] - min) * afterRange) / beforeRange) + 0;
+            //Calculation formula 
+            long value = ((((long)arr[i]-min)*afterRange)/beforeRange);
+            //System.out.println("| Min: " + min + " | Max: " + max + " | BeforeRange: " + beforeRange + " | AfterRange: " + afterRange + " | ArrVal: "+ arr[i] + " | Value: " + value); //DEBUG
             int indexPlace = Math.round(value);
+            //int indexPlace = (int)value;
 
             int forth = 0, back = 0;
             int direction = 1;
             while(!foundPlace){
+                iterations++;
                 //System.out.println("Attemting to place: " + arr[i]); //DEBUG
                 if(indexPlace >= arr.length){
-                    indexPlace = arr.length-1;
+                    //indexPlace = arr.length-1;
+                    indexPlace--;
                 }
                 else if(indexPlace <= 0){
-                    indexPlace = 0;
+                    //indexPlace = 0;
+                    indexPlace++;
                 }
 
                 if(result[indexPlace] == null){
@@ -183,6 +196,9 @@ public class PinBallSort {
             //printArr(result); //DEBUG
         }   
         
+        if(visual){
+            System.out.println("Total Iterations: " + iterations); //DEBUG
+        }
         return result;
     }
 
@@ -282,6 +298,7 @@ public class PinBallSort {
     }
 
     public static void visualRepArr(Integer[] arr){
+        System.out.println();
         System.out.println("=======================================");
         for(int i = 0; i < arr.length; i++){
             if(arr[i] == null){
@@ -290,7 +307,7 @@ public class PinBallSort {
             else{
                 System.out.print("|");
                 for(int j = 0; j < arr[i]; j++){
-                    System.out.print("*");
+                    System.out.print("#");
                 }
                 System.out.println("");
             }

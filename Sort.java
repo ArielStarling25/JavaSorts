@@ -1,9 +1,9 @@
 public class Sort {
     public static void main(String args[]){
-        //testSmallDataSet();
+        testSmallDataSet();
         // testLargeDataSet();
         // testMassiveDataSet();
-        testGiganticDataSet();
+        //testGiganticDataSet();
         //testDuplicatesDataSet();
         //testReverseOrder();
     }
@@ -12,9 +12,9 @@ public class Sort {
         System.out.println("== Gigantic data set ==");
         System.out.println("");
 
-        int size = 200000; //ArraySize
+        int size = 1000000; //ArraySize
         int low = 10; //min value
-        int high = 10000; //max value
+        int high = 10000000; //max value
 
         int[] bigBoiArray = new int[size];
         randomlyFillArray(bigBoiArray, low, high);
@@ -48,17 +48,17 @@ public class Sort {
         timeTaken = timeStop - timeStart;
         printArray(bigBoiArray6, timeTaken, "Pinball Sort");
 
-        timeStart = System.currentTimeMillis();
-        bigBoiArray3 = OtherSorts.insertionSort(bigBoiArray3);
-        timeStop = System.currentTimeMillis();
-        timeTaken = timeStop - timeStart;
-        printArray(bigBoiArray3, timeTaken, "Insertion Sort");
+        // timeStart = System.currentTimeMillis();
+        // bigBoiArray3 = OtherSorts.insertionSort(bigBoiArray3);
+        // timeStop = System.currentTimeMillis();
+        // timeTaken = timeStop - timeStart;
+        // printArray(bigBoiArray3, timeTaken, "Insertion Sort");
 
-        timeStart = System.currentTimeMillis();
-        bigBoiArray4 = OtherSorts.insertionSort(bigBoiArray4);
-        timeStop = System.currentTimeMillis();
-        timeTaken = timeStop - timeStart;
-        printArray(bigBoiArray4, timeTaken, "Selection Sort");
+        // timeStart = System.currentTimeMillis();
+        // bigBoiArray4 = OtherSorts.insertionSort(bigBoiArray4);
+        // timeStop = System.currentTimeMillis();
+        // timeTaken = timeStop - timeStart;
+        // printArray(bigBoiArray4, timeTaken, "Selection Sort");
 
         timeStart = System.currentTimeMillis();
         bigBoiArray5 = OtherSorts.mergeSort(bigBoiArray5, 0, bigBoiArray5.length-1);
@@ -79,8 +79,8 @@ public class Sort {
         System.out.println("== Small data set ==");
         System.out.println("");
 
-        int size = 20; //ArraySize
-        int low = 10; //min value
+        int size = 50; //ArraySize
+        int low = 1; //min value
         int high = 50; //max value
 
         int[] bigBoiArray = new int[size];
@@ -307,9 +307,9 @@ public class Sort {
         System.out.println("== Reverse order data set ==");
         System.out.println("");
 
-        int size = 50; //ArraySize
+        int size = 20; //ArraySize
         int low = 10; //min value
-        int high = 500; //max value
+        int high = 50; //max value
 
         int[] bigBoiArray = new int[size];
         randomlyFillArray(bigBoiArray, low, high);
@@ -336,7 +336,7 @@ public class Sort {
         printArray(bigBoiArray2, timeTaken, "BubbleSort");
 
         timeStart = System.currentTimeMillis();
-        bigBoiArray6 = PinBallSort.sort(bigBoiArray6, false);
+        bigBoiArray6 = PinBallSort.sort(bigBoiArray6, true);
         timeStop = System.currentTimeMillis();
         timeTaken = timeStop - timeStart;
         printArray(bigBoiArray6, timeTaken, "PinBallSort");
