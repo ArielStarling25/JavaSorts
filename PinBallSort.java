@@ -39,7 +39,7 @@ public class PinBallSort {
 
             //Calculation formula 
             long value = ((((long)arr[i]-min)*afterRange)/beforeRange);
-            //System.out.println("| Min: " + min + " | Max: " + max + " | BeforeRange: " + beforeRange + " | AfterRange: " + afterRange + " | ArrVal: "+ arr[i] + " | Value: " + value); //DEBUG
+            System.out.println("| Min: " + min + " | Max: " + max + " | BeforeRange: " + beforeRange + " | AfterRange: " + afterRange + " | ArrVal: "+ arr[i] + " | Value: " + value); //DEBUG
             int indexPlace = Math.round(value);
             //int indexPlace = (int)value;
 
@@ -84,11 +84,13 @@ public class PinBallSort {
                                 else{ //correct pos, place
                                     result[indexPlace] = arr[i];
                                     foundPlace = true;
+                                    //System.out.print(" | PLACED"); //DEBUG
                                 }
                             }
                             else{
                                 result[indexPlace] = arr[i];
                                 foundPlace = true;
+                                //System.out.print(" | PLACED"); //DEBUG
                             }
                         }
                     }
@@ -98,6 +100,7 @@ public class PinBallSort {
                                 result[indexPlace] = arr[i];
                                 foundPlace = true;
                                 //System.out.println("Placed: " + arr[i] + " at: " + indexPlace); //DEBUG
+                                //System.out.print(" | PLACED"); //DEBUG
                             }
                             else{
                                 if(result[indexPlace - 1] > arr[i]){
@@ -136,7 +139,8 @@ public class PinBallSort {
                         else{
                             result[indexPlace] = arr[i];
                             foundPlace = true;
-                            //System.out.println("Placed: " + arr[i] + " at: " + indexPlace); //DEBUG
+                            //System.out.println("| Placed: " + arr[i] + " at: " + indexPlace); //DEBUG
+                            //System.out.print(" | PLACED"); //DEBUG
                         }
                     }
                 }
@@ -195,7 +199,7 @@ public class PinBallSort {
             }
             //printArr(result); //DEBUG
         }   
-        
+
         if(visual){
             System.out.println("Total Iterations: " + iterations); //DEBUG
         }

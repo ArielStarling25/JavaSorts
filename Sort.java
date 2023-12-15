@@ -1,9 +1,9 @@
 public class Sort {
     public static void main(String args[]){
-        testSmallDataSet();
-        // testLargeDataSet();
-        // testMassiveDataSet();
-        //testGiganticDataSet();
+        //testSmallDataSet();
+        //testLargeDataSet();
+        //testMassiveDataSet();
+        testGiganticDataSet();
         //testDuplicatesDataSet();
         //testReverseOrder();
     }
