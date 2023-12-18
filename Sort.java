@@ -14,7 +14,7 @@ public class Sort {
 
         int size = 1000000; //ArraySize
         int low = 10; //min value
-        int high = 10000000; //max value
+        int high = 500000; //max value
 
         int[] bigBoiArray = new int[size];
         randomlyFillArray(bigBoiArray, low, high);

@@ -3,12 +3,14 @@
 // Date Completed: 12/12/2023
 // By: Ariel Starling
 // My own attempt at creating a sorting algorithm :))
-// Current state: No problems as of now
+// Current state: No problems as of now, the only reason it is quite sluggish, is due to its unoptimized nature (its a huge sorting program)
 // Time complexity: 
-// Best case: O(n) 
-// - O(n) only when items have already been sorted, or when there are no duplicate values and they are evenly spaced out according to their array size like non-repeating numbers 1-10 in a size 10 array
+// Best case: O(n + k) 
+// - O(n + k) only when items have already been sorted, or when there are no duplicate values and they are evenly spaced out according to their array size like non-repeating numbers 1-10 in a size 10 array
+
 // Average case: How to say that gradually becomes slower the more the sort progresses? O(n + k)? 
 // - this is the most common case where the more the sort progresses, it will become slower due to more shuffling involved
+
 // Worst case: O(n^3)
 // - this case will only occur when there are many duplicate values and are in reverse order, this is because of a ridiculous amount of shuffling of values involved
 
@@ -32,21 +34,23 @@ public class PinBallSort {
         }
         long beforeRange = (max - min);  
         long afterRange = arr.length-1;  
-        int iterations = 0;
+        long iterations = 0, shift = 0;
 
         for(int i = 0; i < arr.length; i++){
             boolean foundPlace = false;
 
             //Calculation formula 
             long value = ((((long)arr[i]-min)*afterRange)/beforeRange);
-            System.out.println("| Min: " + min + " | Max: " + max + " | BeforeRange: " + beforeRange + " | AfterRange: " + afterRange + " | ArrVal: "+ arr[i] + " | Value: " + value); //DEBUG
+            //System.out.print("| Min: " + min + " | Max: " + max + " | BeforeRange: " + beforeRange + " | AfterRange: " + afterRange + " | ArrVal: "+ arr[i] + " | Value: " + value); //DEBUG
             int indexPlace = Math.round(value);
             //int indexPlace = (int)value;
 
             int forth = 0, back = 0;
             int direction = 1;
             while(!foundPlace){
-                iterations++;
+                if(visual){
+                    iterations++;
+                }
                 //System.out.println("Attemting to place: " + arr[i]); //DEBUG
                 if(indexPlace >= arr.length){
                     //indexPlace = arr.length-1;
@@ -68,11 +72,13 @@ public class PinBallSort {
                                 else{ //correct pos, place
                                     result[indexPlace] = arr[i];
                                     foundPlace = true;
+                                    //System.out.println(" | PLACED"); //DEBUG
                                 }
                             }
                             else{
                                 result[indexPlace] = arr[i];
                                 foundPlace = true;
+                                //System.out.println(" | PLACED"); //DEBUG
                             }
                         }
                         else if(indexPlace >= (result.length-1)){ //check on the left only
@@ -84,13 +90,13 @@ public class PinBallSort {
                                 else{ //correct pos, place
                                     result[indexPlace] = arr[i];
                                     foundPlace = true;
-                                    //System.out.print(" | PLACED"); //DEBUG
+                                    //System.out.println(" | PLACED"); //DEBUG
                                 }
                             }
                             else{
                                 result[indexPlace] = arr[i];
                                 foundPlace = true;
-                                //System.out.print(" | PLACED"); //DEBUG
+                                //System.out.println(" | PLACED"); //DEBUG
                             }
                         }
                     }
@@ -100,7 +106,7 @@ public class PinBallSort {
                                 result[indexPlace] = arr[i];
                                 foundPlace = true;
                                 //System.out.println("Placed: " + arr[i] + " at: " + indexPlace); //DEBUG
-                                //System.out.print(" | PLACED"); //DEBUG
+                                //System.out.println(" | PLACED"); //DEBUG
                             }
                             else{
                                 if(result[indexPlace - 1] > arr[i]){
@@ -120,6 +126,9 @@ public class PinBallSort {
                                 if(indexPlace <= 0 || indexPlace >= (result.length-1)){
                                     //System.out.println("Attempting shifting for escaping from index: " + indexPlace); //DEBUG
                                     int check = checkEmpty(result, indexPlace);
+                                    if(visual){
+                                        shift++;
+                                    }
                                     result = shifter(result, indexPlace, check);
                                     back = 0;
                                     forth = 0;
@@ -140,7 +149,7 @@ public class PinBallSort {
                             result[indexPlace] = arr[i];
                             foundPlace = true;
                             //System.out.println("| Placed: " + arr[i] + " at: " + indexPlace); //DEBUG
-                            //System.out.print(" | PLACED"); //DEBUG
+                            //System.out.println(" | PLACED"); //DEBUG
                         }
                     }
                 }
@@ -186,14 +195,13 @@ public class PinBallSort {
 
                     if(back >= 1 && forth >= 1){ //shift if got space
                         int check = checkEmpty(result, indexPlace);
+                        if(visual){
+                            shift++;
+                        }
                         result = shifter(result, indexPlace, check);
                         back = 0;
                         forth = 0;
                     }
-                }
-
-                if(visual){
-                    visualRepArr(result);
                 }
                 //printArr(result); //DEBUG
             }
@@ -201,7 +209,12 @@ public class PinBallSort {
         }   
 
         if(visual){
-            System.out.println("Total Iterations: " + iterations); //DEBUG
+            System.out.println(" ======= Results =======");
+            System.out.println(" | Total Iterations: " + iterations); 
+            System.out.println(" | Total Shifting: " + shift); 
+            long resultant = iterations / (long)arr.length;
+            System.out.println(" | Result of " + iterations + "/" + arr.length + " = "+ resultant);
+            System.out.println(" | Time complexity: O(" + resultant + "n) for a array length of " + arr.length);
         }
         return result;
     }
